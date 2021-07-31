@@ -52,7 +52,7 @@ jobs:
           first_ssh: |
             mkdir -p /home/deployer/mongo
           scp: |
-            './*' => /home/github/test/
+            './*' => /home/deployer/mongo/
           last_ssh: |
             docker stack deploy --compose-file /home/deployer/mongo/docker-compose.yml mongo
             docker -rf /home/deployer/mongo
