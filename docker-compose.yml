@@ -33,5 +33,5 @@ volumes:
 
 networks:
   backend:
-    external:
-      name: backend
+    external: true
+
