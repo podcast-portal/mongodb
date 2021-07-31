@@ -54,6 +54,7 @@ jobs:
           scp: |
             './*' => /home/deployer/mongo/
           last_ssh: |
+            echo $ROOTPASSWORD
             docker stack deploy --compose-file /home/deployer/mongo/docker-compose.yml mongo
-            docker -rf /home/deployer/mongo
+            rm -rf /home/deployer/mongo
 
