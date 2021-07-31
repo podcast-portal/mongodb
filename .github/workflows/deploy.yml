@@ -45,8 +45,8 @@ jobs:
           ssh_public_key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
           # SSH private key used to connect to the docker host
           ssh_private_key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
-#           # Deployment command args.
-#           args: 
+          # Deployment command args.
+          args: mongo
           # Deployment mode either docker-swarm or docker-compose. Default is docker-compose.
           deployment_mode: docker-swarm
           # Docker stack file used. Default is docker-compose.yaml
