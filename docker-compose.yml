@@ -32,6 +32,7 @@ volumes:
   data:
 
 networks:
-  backend:
+  default:
     external: true
+    name: backend
 
