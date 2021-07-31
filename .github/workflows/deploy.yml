@@ -41,7 +41,7 @@ jobs:
       - name: update
         # You may pin to the exact commit or the version.
         # uses: cross-the-world/ssh-pipeline@7f022867934a210af826af99ef80d96f03a094d5
-        uses: cross-the-world/ssh-pipeline@v1.2.0
+        uses: cross-the-world/ssh-scp-ssh-pipelines@latest
         env:
           ROOTPASSWORD: ${{ secrets.MONGODB_ROOTPASSWORD }}
         with:
