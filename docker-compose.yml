@@ -22,5 +22,6 @@ volumes:
   data:
     driver: local
     driver_opts:
+      type: "nfs"
       device: "/data/mongo"
 
