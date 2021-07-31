@@ -11,6 +11,16 @@ services:
       - "27017:27017"
     volumes:
       - data:/data/db
+    networks:
+      - backend
+    configs:
+      # to avoid changes to the original mongo image, we import the healthcheck script using configs
+      - mongo-healthcheck
+    healthcheck:
+      test: ["CMD", "bash", "/mongo-healthcheck"]
+      interval: 1m
+      timeout: 10s
+      retries: 3
     deploy:
       mode: replicated
       replicas: 1
@@ -20,9 +30,8 @@ services:
 
 volumes:
   data:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: "/data/mongo"
 
+networks:
+  backend:
+    external:
+      name: backend
