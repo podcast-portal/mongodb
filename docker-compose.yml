@@ -5,7 +5,7 @@ services:
     image: mongo
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: ${{ secrets.MONGODB_ROOTPASSWORD }}
+      MONGO_INITDB_ROOT_PASSWORD: ${secrets.MONGODB_ROOTPASSWORD}
     command: [--auth]
     ports:
       - "27017:27017"
