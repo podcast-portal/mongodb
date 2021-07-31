@@ -28,6 +28,11 @@ services:
         constraints:
           - node.labels.mongo == master
 
+configs:
+  # to avoid changes to the original mongo image, we import the healthcheck script using configs
+  mongo-healthcheck:
+    file: mongo-healthcheck
+
 volumes:
   data:
 
