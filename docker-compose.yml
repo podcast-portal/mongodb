@@ -11,6 +11,8 @@ services:
       - "27017:27017"
     volumes:
       - data:/data/db
+    networks:
+      - net
     configs:
       # to avoid changes to the original mongo image, we import the healthcheck script using configs
       - mongo-healthcheck
@@ -35,7 +37,5 @@ volumes:
   data:
 
 networks:
-  default:
-    external:
-      name: backend
+  net:
 
