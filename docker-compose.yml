@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  db:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: ${{ secrets.DOCKER_HUB_USERNAME }}
+    command: [--auth]
+    ports:
+      - "27017:27017"
+    volumes:
+      - data:/data/db
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.mongo == master
+
+volumes:
+  data:
+    driver: local
