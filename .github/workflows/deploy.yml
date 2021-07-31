@@ -39,4 +39,4 @@ jobs:
           remote_host: ssh://deployer@master01.vps.webdock.io
           ssh_public_key: ${{ secrets.DEPLOY_PUBLIC_KEY }}
           ssh_private_key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
-          args: stack deploy --docker-compose.yml mongo
+          args: stack deploy --compose-file docker-compose.yml mongo
