@@ -10,7 +10,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - data:/data/db
+      - /data/mongo:/data/db
     deploy:
       mode: replicated
       replicas: 1
@@ -18,6 +18,3 @@ services:
         constraints:
           - node.labels.mongo == master
 
-volumes:
-  data:
-    driver: local
