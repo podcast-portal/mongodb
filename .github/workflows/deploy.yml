@@ -28,22 +28,26 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: ssh deploy
+      - name: deploy
         # You may pin to the exact commit or the version.
         # uses: easingthemes/ssh-deploy@c711f2c3391cac2876bf4c833590077f02e4bcb8
         uses: easingthemes/ssh-deploy@v2.2.11
         with:
-          # Private Key
           SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_PRIVATE_KEY }}
-          # Remote host
           REMOTE_HOST: master01.vps.webdock.io
-          # Remote user
           REMOTE_USER: deployer
-          # Source directory
-#           SOURCE: # optional, default is 
-          # Target directory
           TARGET: /home/deployer/mongo
-          # Arguments to pass to rsync
-#           ARGS: # optional, default is -rltgoDzvO
-          # An array of folder to exclude
-#           EXCLUDE: # optional, default is 
+          
+      - name: update
+        # You may pin to the exact commit or the version.
+        # uses: cross-the-world/ssh-pipeline@7f022867934a210af826af99ef80d96f03a094d5
+        uses: cross-the-world/ssh-pipeline@v1.2.0
+        with:
+          # ssh remote host
+          host: master01.vps.webdock.io
+          # ssh remote user
+          user: deployer
+          # content of ssh private key. ex raw content of ~/.ssh/id_rsa
+          key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+          # execute commands on ssh
+          script: docker stack deploy --compose-file /home/deployer/mongo/docker-compose.yml mongo
