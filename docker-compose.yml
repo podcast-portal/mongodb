@@ -39,6 +39,7 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: ${ROOTPASSWORD}
+      ME_CONFIG_MONGODB_SERVER: mongo_db
 
 #  controller:
 #    image: martel/mongo-replica-ctrl:latest
