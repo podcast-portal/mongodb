@@ -3,7 +3,7 @@ version: '3.7'
 services:
   db:
     image: mongo
-    entrypoint: ["/usr/bin/mongod", "--auth", "--journal", "--bind_ip", "0.0.0.0"]
+    entrypoint: ["/usr/bin/mongod", "--auth"]
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: ${ROOTPASSWORD}
