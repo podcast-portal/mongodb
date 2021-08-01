@@ -30,6 +30,16 @@ services:
         parallelism: 1
         delay: 1m30s
 
+  express:
+    image: mongo-express
+    ports:
+      - target: 8081
+        published: 8081
+        mode: host
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${ROOTPASSWORD}
+
 #  controller:
 #    image: martel/mongo-replica-ctrl:latest
 #    volumes:
