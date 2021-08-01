@@ -10,8 +10,8 @@ services:
     # The usage of volume provides persistence, but may work correctly only with 1 volume per node (that's why global mode is recommended)
     volumes:
       - mongodata:/data/db
-    networks:
-      - net
+#    networks:
+#      - net
     configs:
       # to avoid changes to the original mongo image, we import the healthcheck script using configs
       - mongo-healthcheck
@@ -42,8 +42,8 @@ services:
       - MONGO_PORT=27017
       # - DEBUG=1 #uncomment to debug the script
     entrypoint: python /src/replica_ctrl.py
-    networks:
-      - net
+#    networks:
+#      - net
     depends_on:
       - "mongo"
     deploy:
@@ -62,6 +62,6 @@ configs:
 volumes:
   mongodata:
 
-networks:
-  net:
+#networks:
+#  net:
 
