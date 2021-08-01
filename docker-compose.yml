@@ -3,11 +3,11 @@ version: '3.7'
 services:
   db:
     image: mongo
-#    entrypoint: ["/usr/bin/mongod", "--journal", "--bind_ip", "0.0.0.0", "--auth"]
+    entrypoint: ["/usr/bin/mongod", "--journal", "--bind_ip", "0.0.0.0", "--auth"]
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: ${ROOTPASSWORD}
-    command: [--auth]
+#    command: [--auth]
     ports:
       - target: 27017
         published: 27017
