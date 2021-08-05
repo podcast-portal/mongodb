@@ -34,7 +34,7 @@ services:
       resources:
         limits:
           cpus: '8'
-          memory: 8G
+          memory: 12G
 
   express:
     image: mongo-express
