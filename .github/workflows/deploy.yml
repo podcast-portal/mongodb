@@ -45,6 +45,7 @@ jobs:
         uses: cross-the-world/ssh-scp-ssh-pipelines@latest
         env:
           ROOTPASSWORD: ${{ secrets.MONGODB_ROOTPASSWORD }}
+          ROOTUSER: ${{ secrets.MONGODB_ROOTUSER }}
         with:
           host: master01.vps.webdock.io
           user: deployer
@@ -55,7 +56,7 @@ jobs:
           scp: |
             './*' => /home/deployer/mongo/
           last_ssh: |
-            export ROOTPASSWORD=${{ secrets.MONGODB_ROOTPASSWORD }}
+            export ROOTPASSWORD=${{ secrets.MONGODB_ROOTPASSWORD }} ROOTUSER=${{ secrets.MONGODB_ROOTUSER }}
             docker stack deploy --compose-file /home/deployer/mongo/docker-compose.yml mongo
             rm -rf /home/deployer/mongo
 
