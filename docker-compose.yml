@@ -5,7 +5,7 @@ services:
     image: mongo
 #    entrypoint: ["/usr/bin/mongod", "--journal", "--bind_ip", "0.0.0.0", "--auth"]
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_USERNAME: ${ROOTUSER}
       MONGO_INITDB_ROOT_PASSWORD: ${ROOTPASSWORD}
     command: [--auth]
     ports:
@@ -43,33 +43,9 @@ services:
         published: 8081
         mode: host
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${ROOTUSER}
       ME_CONFIG_MONGODB_ADMINPASSWORD: ${ROOTPASSWORD}
       ME_CONFIG_MONGODB_SERVER: 45.148.31.135
-
-#  controller:
-#    image: martel/mongo-replica-ctrl:latest
-#    volumes:
-#      # TODO: Avoid exposing the docker socket (security issue)
-#      - /var/run/docker.sock:/var/run/docker.sock
-#    environment:
-#      - OVERLAY_NETWORK_NAME=mongo_net
-#      - MONGO_SERVICE_NAME=mongo_db
-#      - REPLICASET_NAME=${REPLICASET_NAME:-rs}
-#      - MONGO_PORT=27017
-#      # - DEBUG=1 #uncomment to debug the script
-#    entrypoint: python /src/replica_ctrl.py
-##    networks:
-##      - net
-#    depends_on:
-#      - "mongo"
-#    deploy:
-#      mode: replicated
-#      replicas: 1
-#      placement:
-#        constraints: [node.role==manager]
-#      restart_policy:
-#        condition: on-failure
 
 configs:
   # to avoid changes to the original mongo image, we import the healthcheck script using configs
