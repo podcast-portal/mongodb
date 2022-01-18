@@ -13,7 +13,7 @@ services:
         published: 27017
         mode: host
     volumes:
-      - data:/data/db
+      - mongo_data:/data/db
       - /data/mongo_config/:/data/configdb
     networks:
       - backend
@@ -53,7 +53,7 @@ configs:
     file: mongo-healthcheck
 
 volumes:
-  data:
+  mongo_data:
 
 networks:
   backend:
