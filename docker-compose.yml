@@ -36,19 +36,7 @@ services:
           cpus: '8'
           memory: 12G
 
-  express:
-    image: mongo-express
-    ports:
-      - target: 8081
-        published: 8081
-        mode: host
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: ${ROOTUSER}
-      ME_CONFIG_MONGODB_ADMINPASSWORD: ${ROOTPASSWORD}
-      ME_CONFIG_MONGODB_SERVER: 45.148.31.135
-
 configs:
-  # to avoid changes to the original mongo image, we import the healthcheck script using configs
   mongo-healthcheck:
     file: mongo-healthcheck
 
