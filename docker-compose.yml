@@ -10,7 +10,7 @@ services:
     command: [--auth]
     ports:
       - target: 27017
-        published: 27017
+        published: 57582
         mode: host
     volumes:
       - mongo_data:/data/db

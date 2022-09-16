@@ -23,6 +23,7 @@ jobs:
     env:
       ROOTPASSWORD: ${{ secrets.MONGODB_ROOTPASSWORD }}
       ROOTUSER: ${{ secrets.MONGODB_ROOTUSER }}
+      MONGODBPORT: ${{ secrets.MONGODB_PORT }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -36,17 +37,18 @@ jobs:
         env:
           ROOTPASSWORD: ${{ secrets.MONGODB_ROOTPASSWORD }}
           ROOTUSER: ${{ secrets.MONGODB_ROOTUSER }}
+          MONGODBPORT: ${{ secrets.MONGODB_PORT }}
         with:
-          host: master01.vps.webdock.io
-          user: deploy
+          host: ${{ secrets.DEPLOY_HOST }}
+          user: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
 
           first_ssh: |
-            mkdir -p /home/deploy/mongo
+            mkdir -p /home/${{ secrets.DEPLOY_USER }}/mongo
           scp: |
-            './*' => /home/deploy/mongo/
+            './*' => /home/${{ secrets.DEPLOY_USER }}/mongo/
           last_ssh: |
-            export ROOTPASSWORD=${{ secrets.MONGODB_ROOTPASSWORD }} ROOTUSER=${{ secrets.MONGODB_ROOTUSER }}
-            docker stack deploy --compose-file /home/deploy/mongo/docker-compose.yml mongo
-            rm -rf /home/deploy/mongo
+            export ROOTPASSWORD=${{ secrets.MONGODB_ROOTPASSWORD }} ROOTUSER=${{ secrets.MONGODB_ROOTUSER }} MONGODBPORT=${{ secrets.MONGODB_PORT }}
+            docker stack deploy --compose-file /home/${{ secrets.DEPLOY_USER }}/mongo/docker-compose.yml mongo
+            rm -rf /home/${{ secrets.DEPLOY_USER }}/mongo
 
