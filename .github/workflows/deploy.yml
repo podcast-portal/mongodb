@@ -23,7 +23,6 @@ jobs:
     env:
       ROOTPASSWORD: ${{ secrets.MONGODB_ROOTPASSWORD }}
       ROOTUSER: ${{ secrets.MONGODB_ROOTUSER }}
-      MONGODBPORT: ${{ secrets.MONGODB_PORT }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -35,7 +34,6 @@ jobs:
         env:
           ROOTPASSWORD: ${{ secrets.MONGODB_ROOTPASSWORD }}
           ROOTUSER: ${{ secrets.MONGODB_ROOTUSER }}
-          MONGODBPORT: ${{ secrets.MONGODB_PORT }}
         with:
           host: ${{ secrets.DEPLOY_HOST }}
           user: ${{ secrets.DEPLOY_USER }}
@@ -47,7 +45,7 @@ jobs:
           scp: |
             './*' => /home/${{ secrets.DEPLOY_USER }}/mongo/
           last_ssh: |
-            export ROOTPASSWORD=${{ secrets.MONGODB_ROOTPASSWORD }} ROOTUSER=${{ secrets.MONGODB_ROOTUSER }} MONGODBPORT=${{ secrets.MONGODB_PORT }}
+            export ROOTPASSWORD=${{ secrets.MONGODB_ROOTPASSWORD }} ROOTUSER=${{ secrets.MONGODB_ROOTUSER }}
             docker stack deploy --compose-file /home/${{ secrets.DEPLOY_USER }}/mongo/docker-compose.yml mongo
             rm -rf /home/${{ secrets.DEPLOY_USER }}/mongo
 
