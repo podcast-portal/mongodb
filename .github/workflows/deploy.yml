@@ -28,16 +28,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-#
-#      - name: deploy
-#        # You may pin to the exact commit or the version.
-#        # uses: easingthemes/ssh-deploy@c711f2c3391cac2876bf4c833590077f02e4bcb8
-#        uses: easingthemes/ssh-deploy@v2.2.11
-#        with:
-#          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_PRIVATE_KEY }}
-#          REMOTE_HOST: master01.vps.webdock.io
-#          REMOTE_USER: deployer
-#          TARGET: /home/deployer/mongo
 
       - name: update
         # You may pin to the exact commit or the version.
@@ -48,15 +38,15 @@ jobs:
           ROOTUSER: ${{ secrets.MONGODB_ROOTUSER }}
         with:
           host: master01.vps.webdock.io
-          user: deployer
+          user: deploy
           key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
 
           first_ssh: |
-            mkdir -p /home/deployer/mongo
+            mkdir -p /home/deploy/mongo
           scp: |
-            './*' => /home/deployer/mongo/
+            './*' => /home/deploy/mongo/
           last_ssh: |
             export ROOTPASSWORD=${{ secrets.MONGODB_ROOTPASSWORD }} ROOTUSER=${{ secrets.MONGODB_ROOTUSER }}
-            docker stack deploy --compose-file /home/deployer/mongo/docker-compose.yml mongo
-            rm -rf /home/deployer/mongo
+            docker stack deploy --compose-file /home/deploy/mongo/docker-compose.yml mongo
+            rm -rf /home/deploy/mongo
 
