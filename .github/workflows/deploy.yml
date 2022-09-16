@@ -31,8 +31,6 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: update
-        # You may pin to the exact commit or the version.
-        # uses: cross-the-world/ssh-pipeline@7f022867934a210af826af99ef80d96f03a094d5
         uses: cross-the-world/ssh-scp-ssh-pipelines@latest
         env:
           ROOTPASSWORD: ${{ secrets.MONGODB_ROOTPASSWORD }}
@@ -41,6 +39,7 @@ jobs:
         with:
           host: ${{ secrets.DEPLOY_HOST }}
           user: ${{ secrets.DEPLOY_USER }}
+          port: ${{ secrets.DEPLOY_PORT }}
           key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
 
           first_ssh: |
